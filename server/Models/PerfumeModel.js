@@ -13,6 +13,6 @@ const PerfumeSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-const PerfumeModel = mongoose.model('Perfume', PerfumeSchema)
+const PerfumeModel = mongoose.model('perfume', PerfumeSchema)
 
 module.exports = PerfumeModel

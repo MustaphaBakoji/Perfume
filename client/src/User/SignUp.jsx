@@ -7,10 +7,11 @@ function SignUp() {
         setinputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
     let SubmitHandler = () => {
+        console.log(inputs);
         if (inputs.name && inputs.password) {
-            // fetch('http://localhost:4000/', { method: "POST", body: inputs }).then((res) => res.json()).then((data) => {
-            //     console.log(data);
-            // })
+            fetch('http://localhost:4000/api/auth/signUp', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputs) }).then((res) => res.json()).then((data) => {
+                console.log(data);
+            })
             console.log(inputs);
         }
     }
@@ -25,7 +26,7 @@ function SignUp() {
             <div className=' flex flex-col sm:flex-row text-slate-600'><p> password:</p>
                 <input type="password" name="password" id="" placeholder='********** ' className=' bg-transparent border-[1px] border-slate-500  placeholder-slate-600 placeholder-opacity-80' />
             </div>
-            <div> <button className=' bg-indigo-950 rounded-md w-40 sm:w-80 h-12 text-white ' onClick={SubmitHandler}>Login</button>
+            <div> <button className=' bg-indigo-950 rounded-md w-40 sm:w-80 h-12 text-white sm:hover:w-96' onClick={SubmitHandler}>Register</button>
                 <p>alreay have an account?<Link to={'/login'}> <span className=' text-primary'>Login</span></Link></p>
             </div>
         </div>

@@ -1,17 +1,29 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { loginActions } from '../Redux/UserSlice'
+import { useDispatch } from 'react-redux'
 function Login() {
     const [inputs, setinputs] = useState({})
+    let navigate = useNavigate()
     let InputsHandler = (e) => {
         setinputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
+    let dispatch = useDispatch()
+
     let SubmitHandler = () => {
+
         if (inputs.name && inputs.password) {
-            // fetch('http://localhost:4000/', { method: "POST", body: inputs }).then((res) => res.json()).then((data) => {
-            //     console.log(data);
-            // })
-            console.log(inputs);
+
+            fetch('http://localhost:4000/api/auth/login', { method: "POST", body: JSON.stringify(inputs), credentials: 'include', headers: { 'Content-Type': 'application/json' }, }).then((res) => res.json()).then((data) => {
+
+                if (data.status === "success") {
+
+                    dispatch(loginActions.setLogin())
+                    dispatch(loginActions.setId({ id: data.id }))
+                    navigate('/')
+
+                }
+            })
         }
     }
     return (

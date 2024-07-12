@@ -24,7 +24,8 @@ let UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['regular', 'admin']
+        enum: ['regular', 'admin'],
+        default: 'regular'
     }
 
 }, { timestamps: true })

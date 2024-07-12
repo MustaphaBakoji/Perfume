@@ -1,40 +1,80 @@
 const PerfumeModel = require('../Models/PerfumeModel')
 const AuthMiddleware = require('../Utils/AuthMiddleware')
 const Cloudinary = require('cloudinary').v2
-const datauri = require('datauri')
+
 const { MulterUploads } = require('../Utils/Multer')
 
 let PerfsRoute = require('express').Router()
-PerfsRoute.post('/upload', MulterUploads, async (req, res) => {
+PerfsRoute.post('/addPerfume',
+    AuthMiddleware.AuthMiddleware, AuthMiddleware.addPerfMiddleware,
+    MulterUploads, async (req, res) => {
 
-    try {
-        const b64 = Buffer.from(req.file.buffer).toString("base64");
-        let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
-        let image = await Cloudinary.uploader.upload(dataURI, { folder: 'Perfumes' })
-        let image_url = image.secure_url
-        let { name, price, } = JSON.parse(req.headers.additionalData)
+        try {
+            const b64 = Buffer.from(req.file.buffer).toString("base64");
+            let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+            let image = await Cloudinary.uploader.upload(dataURI, { folder: 'Perfumes' })
+            let image_url = image.secure_url
+            let { name, price, } = JSON.parse(req.headers.properties)
+            let perfume = await PerfumeModel.create({ name, image_url, price })
+            res.status(201).json({
+                status: 'success',
+                perfume: perfume.name
 
-        PerfumeModel.create({ name, image_url, price })
-    } catch (error) {
-        console.log('errro', error.message);
-    }
+            })
 
-    // 
+        } catch (error) {
+            res.status(400).json({
+                status: 'fail',
+                message: error.message || 'unable to upload image check the format and try agai!'
+            })
+
+        }
+
+        //
 
 
-    res.json({ sucess: 'sucess' })
 
-})
-PerfsRoute.get('perfumes', async (req, res) => {
+
+    })
+PerfsRoute.put('/update',
+
+    async (req, res) => {
+
+        try {
+
+            let perfume = await PerfumeModel.findOneAndUpdate({ name: 'musk alarabi' }, { $set: req.body }, { new: true })
+            res.status(201).json({
+                status: 'success',
+                perfume: perfume.price
+
+            })
+
+        } catch (error) {
+            res.status(400).json({
+                status: 'fail',
+                message: 'can`t update'
+            })
+
+        }
+
+        //
+
+
+
+
+    })
+PerfsRoute.get('/perfumes', async (req, res) => {
     let perfumes = await PerfumeModel.find()
     if (perfumes) {
         res.status(200).json({
-            status: 'sucess',
-            perfumes
+            status: 'success',
+            perfumes: perfumes
         })
     } else {
         res.status(400).json({
-            status: 'no_perfumes',
+            status: 'fail',
+            message: 'no perfumes'
+
 
         })
     }

@@ -11,6 +11,10 @@ import Login from './User/Login';
 import AdminBody from './Admin/AdminBody';
 import AdminPerfume from './Admin/AdminPerfume';
 import AddPerfume from './Admin/AddPerfume';
+import Loading from './Components/Loading';
+import Error from './Components/Error';
+import NotFound from './Components/NotFound';
+import ShoppingCart from './Cart/CartBody';
 
 function App() {
 
@@ -27,10 +31,15 @@ function App() {
           <Route path='/' element={<Body />} />
           <Route path='/signUp' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/admin' element={<AdminBody />} />
+          <Route path='/Error' element={<Error />} />
+          <Route path='/cart' element={<ShoppingCart />} />
+
+          <Route path='/*' element={<NotFound />} />
+
         </Route>
       </Routes>
 
-      <AddPerfume />
     </div>
   );
 }

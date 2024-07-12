@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 4000
 let dotenv = require('dotenv')
-let cors = require('cors')
-app.use(cors())
+let cors = require('cors'),
+    CartsRouter = require('./Routes/CartRoutes')
+app.use(cors({ origin: ['http://localhost:3000'], credentials: true }))
 app.use(express.urlencoded({ extended: true }));
 
 const AuthRouter = require('./Routes/AuthRoutes'),
@@ -27,4 +28,5 @@ cloudinary.config({
 app.get('/', (req, res) => { res.send("mustapha bakoji dnndndnnnn ,mad") })
 app.use('/api/auth', AuthRouter)
 app.use('/api/perfumes', PerfsRoute)
-app.listen(port, () => console.log(`Example app listening at http://localhost:4000`))
+app.use('/api/cart', CartsRouter)
+app.listen(port, () => console.log(`Example app listening at http://localhost:4000/`))

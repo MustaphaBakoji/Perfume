@@ -1,25 +1,41 @@
 let jwt = require("jsonwebtoken")
 const UserModel = require("../Models/UserModel")
 
-let AuthMiddleware = (req, res, next) => {
+exports.AuthMiddleware = async (req, res, next) => {
+
     try {
-        let token = req.cookies()
+        let token = req.cookies.jwt
+
         if (token) {
 
             token = jwt.verify(token, process.env.SECRET_KEY)
-            let user = UserModel.findById(token.id)
-            req.user = user
 
-            console.log("dfd", user);
-            next()
+            req.user = await UserModel.findById(token.id)
+
+
+            return next()
         }
-        res.status(401).json({
-            status: "un_authorised"
+        return res.status(401).json({
+            status: "fail",
+            message: 'unauthorised'
         })
     } catch (error) {
         res.status(401).json({
-            status: "un_authorised"
+            status: "fail",
+            message: 'unauthorised'
         })
     }
 }
-module.exports = AuthMiddleware
+exports.addPerfMiddleware = (req, res, next) => {
+
+    if (req.user.role === 'admin') {
+
+        return next()
+
+    }
+    return res.status(401).json({
+        status: "fail",
+        messge: 'you are not allowed to visit this route because you are not admin'
+    })
+
+}
