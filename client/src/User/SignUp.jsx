@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { erroActions } from '../Redux/ErrrorSlice'
+import { useDispatch } from 'react-redux'
 
 function SignUp() {
     const [inputs, setinputs] = useState({})
     let InputsHandler = (e) => {
         setinputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
+    let dispatch = useDispatch()
+    let navigate = useNavigate()
     let SubmitHandler = () => {
         console.log(inputs);
         if (inputs.name && inputs.password) {
             fetch('http://localhost:4000/api/auth/signUp', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputs) }).then((res) => res.json()).then((data) => {
-                console.log(data);
+                if (data.status === 'success') {
+                    console.log('normal');
+
+                } else {
+                    dispatch(erroActions.setError({ code: 400, message: data.message }))
+                    navigate('/Error')
+                }
             })
             console.log(inputs);
         }

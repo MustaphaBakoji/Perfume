@@ -4,13 +4,15 @@ import { CiShoppingCart } from "react-icons/ci"
 import { useDispatch, useSelector } from 'react-redux'
 import { loginActions } from '../Redux/UserSlice'
 import ShoppingCart from '../Cart/CartBody'
+import { useNavigate, } from 'react-router'
 
 
 function Header() {
+    let navigate = useNavigate()
     let { id } = useSelector(state => state.userSlice)
     let dispatch = useDispatch()
 
-    const [cart, setcart] = useState(false)
+
     useEffect(() => {
 
         id && fetch(`http://localhost:4000/api/cart/${id}`).then(res => res.json()).then((data) => {
@@ -21,7 +23,9 @@ function Header() {
     }, [id])
     let { cartNo } = useSelector(state => state.userSlice)
     let CartHandler = () => {
-        setcart(prev => !prev)
+
+        navigate('/cart')
+
     }
     console.log(cartNo);
     return (
@@ -33,7 +37,7 @@ function Header() {
             </div>
         </div>
 
-            {cart && <ShoppingCart />}
+
         </div>
     )
 }

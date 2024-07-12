@@ -17,7 +17,8 @@ AuthRouter.post('/signUp', async (req, res) => {
         })
     } catch (error) {
         res.status(400).json({
-            status: "fail", mesage: error.message
+            status: "fail", mesage: error.message,
+            message: error.message || "check your inputs and try again"
         })
     }
 
@@ -45,14 +46,14 @@ AuthRouter.post('/login', async (req, res) => {
             }
             else {
                 res.status(401).json({
-                    status: "unauthorised1",
+                    status: "unauthorised",
                     mesage: "username or password not found"
                 })
             }
         }
         else {
             res.status(401).json({
-                status: "unauthorised2",
+                status: "unauthorised",
                 mesage: "username or password not found"
             })
         }

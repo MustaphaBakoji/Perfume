@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginActions } from '../Redux/UserSlice'
 import { useDispatch } from 'react-redux'
+import { erroActions } from '../Redux/ErrrorSlice'
 function Login() {
     const [inputs, setinputs] = useState({})
     let navigate = useNavigate()
@@ -22,6 +23,10 @@ function Login() {
                     dispatch(loginActions.setId({ id: data.id }))
                     navigate('/')
 
+                }
+                else {
+                    dispatch(erroActions.setError({ code: 404, message: data.message }))
+                    navigate('/Error')
                 }
             })
         }
