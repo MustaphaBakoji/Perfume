@@ -36,7 +36,7 @@ cloudinary.config({
 });
 
 // Serve static files from the 'build' folder (React app)
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // API routes
 const AuthRouter = require('./Routes/AuthRoutes');
@@ -49,10 +49,13 @@ app.use('/api/perfumes', PerfsRoute);
 app.use('/api/cart', CartsRouter);
 
 // Handle other requests (e.g., React Router routes)
-app.get('*', (req, res) => {
 
+
+// For any other route, serve the index.html file
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
 
 // Start the server
 app.listen(port, () => {
