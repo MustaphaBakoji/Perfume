@@ -14,7 +14,7 @@ const path = require('path'); // Added for serving React files
 dotenv.config();
 
 // Middleware
-app.use(cors({ credentials: true }));
+app.use(cors({ origin: "https://perfume-vfig.onrender.com", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -60,5 +60,5 @@ app.get('*', (req, res) => {
 // Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}/`);
-    log(__dirname)
+
 });
