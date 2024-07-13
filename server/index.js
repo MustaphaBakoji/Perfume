@@ -42,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 const AuthRouter = require('./Routes/AuthRoutes');
 const PerfsRoute = require('./Routes/PerfsRoute');
 const CartsRouter = require('./Routes/CartRoutes');
+const { log } = require('console');
 
 app.use('/api/auth', AuthRouter);
 app.use('/api/perfumes', PerfsRoute);
@@ -49,10 +50,12 @@ app.use('/api/cart', CartsRouter);
 
 // Handle other requests (e.g., React Router routes)
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}/`);
+    log(__dirname)
 });
