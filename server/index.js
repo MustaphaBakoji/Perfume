@@ -14,7 +14,7 @@ const path = require('path'); // Added for serving React files
 dotenv.config();
 
 // Middleware
-app.use(cors({ origin: "https://perfume-vfig.onrender.com", credentials: true }));
+app.use(cors({ origin: ["https://perfume-vfig.onrender.com", "*"], credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
