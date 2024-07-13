@@ -2,7 +2,7 @@ const UserModel = require('../Models/UserModel')
 const jwtToken = require('../Utils/jwtToken')
 let AuthRouter = require('express').Router()
 AuthRouter.post('/signUp', async (req, res) => {
-    console.log(req.body);
+
     try {
 
         let { name, email, phone, password } = req.body
@@ -17,8 +17,8 @@ AuthRouter.post('/signUp', async (req, res) => {
         })
     } catch (error) {
         res.status(400).json({
-            status: "fail", mesage: error.message,
-            message: error.message || "check your inputs and try again"
+            status: "fail",
+            message: error.message + "!!" || "check your inputs and try again"
         })
     }
 
