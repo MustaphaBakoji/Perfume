@@ -35,7 +35,7 @@ function AdminPerfume({ name, price, url }) {
 
                     seteditable(true)
                     setIsLoading(true)
-                    fetch('http://localhost:4000/api/perfumes/update', {
+                    fetch('https://perfume-vfig.onrender.com/api/perfumes/update', {
                         method: "PUT",
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ price: updatedPrice, name })

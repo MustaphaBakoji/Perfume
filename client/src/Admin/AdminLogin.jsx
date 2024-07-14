@@ -20,7 +20,7 @@ function AdminLogin() {
         setLoading(true)
         if (inputs.name && inputs.password) {
 
-            fetch('http://localhost:4000/api/auth/login', { method: "POST", body: JSON.stringify(inputs), credentials: 'include', headers: { 'Content-Type': 'application/json' }, }).then(res => res.json()).then(data => {
+            fetch('https://perfume-vfig.onrender.com/api/auth/login', { method: "POST", body: JSON.stringify(inputs), credentials: 'include', headers: { 'Content-Type': 'application/json' }, }).then(res => res.json()).then(data => {
                 if (data.role === 'admin') {
                     setLoading(false)
                     dispatch(actions.setAdmin(true))

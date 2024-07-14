@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 function Image({ name, url, category, price, perfume_id }) {
     let { id } = useSelector(state => state.userSlice)
     let CartHandler = () => {
-        id && fetch("http://localhost:4000/api/cart/carts", {
+        id && fetch("https://perfume-vfig.onrender.com/api/cart/carts", {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 user_id: id,

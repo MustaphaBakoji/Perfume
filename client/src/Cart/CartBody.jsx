@@ -11,7 +11,7 @@ const ShoppingCart = () => {
 
     useEffect(() => {
 
-        id && fetch(`http://localhost:4000/api/cart/${id}`).then(res => res.json()).then((data) => {
+        id && fetch(`https://perfume-vfig.onrender.com/api/cart/${id}`).then(res => res.json()).then((data) => {
             setProducts(data.perfumes)
             dispatch(loginActions.setCartno({ cartNo: data.perfumes.length }))
         })

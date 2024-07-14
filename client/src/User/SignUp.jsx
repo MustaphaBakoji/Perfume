@@ -16,7 +16,7 @@ function SignUp() {
             fetch('http://localhost:4000/api/auth/signUp', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputs) }).then((res) => res.json()).then((data) => {
                 if (data.status === 'success') {
                     console.log('normal');
-
+                    navigate('/login')
                 } else {
                     dispatch(erroActions.setError({ code: 400, message: data.message }))
                     navigate('/Error')

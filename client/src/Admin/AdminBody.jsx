@@ -17,7 +17,7 @@ function AdminBody() {
     console.log('isadmin', isAdmin);
     useEffect(() => {
 
-        fetch('http://localhost:4000/api/perfumes/perfumes').then(res => res.json()).then(data => {
+        fetch('https://perfume-vfig.onrender.com/api/perfumes/perfumes').then(res => res.json()).then(data => {
             if (data.status === 'success') {
                 setperfumes(data.perfumes)
             }

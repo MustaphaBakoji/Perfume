@@ -24,7 +24,7 @@ function AddPerfume() {
             let form = new FormData()
             form.append('image', image)
 
-            fetch('http://localhost:4000/api/perfumes/addPerfume', {
+            fetch('https://perfume-vfig.onrender.com/api/perfumes/addPerfume', {
                 method: "POST",
                 body: form,
                 credentials: 'include',
