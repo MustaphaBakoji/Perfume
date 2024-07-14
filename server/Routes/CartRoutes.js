@@ -9,7 +9,7 @@ CartRouter.post('/carts', async (req, res) => {
         let user = await CartModel.findOne({ user: user_id })
 
         if (user) {
-            user.perfumes.push(perfume_id);
+            !user.perfumes.includes(perfume_id) && user.perfumes.push(perfume_id);
 
             await user.save();
             console.log(user.perfumes);
