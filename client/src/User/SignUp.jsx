@@ -13,7 +13,7 @@ function SignUp() {
     let SubmitHandler = () => {
         console.log(inputs);
         if (inputs.name && inputs.password) {
-            fetch('http://localhost:4000/api/auth/signUp', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputs) }).then((res) => res.json()).then((data) => {
+            fetch('https://perfume-vfig.onrender.com/api/auth/signUp', { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputs) }).then((res) => res.json()).then((data) => {
                 if (data.status === 'success') {
                     console.log('normal');
                     navigate('/login')
