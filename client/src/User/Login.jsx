@@ -28,6 +28,9 @@ function Login() {
                     dispatch(erroActions.setError({ code: 404, message: data.message }))
                     navigate('/Error')
                 }
+            }).catch((err) => {
+                dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+                navigate('/Error')
             })
         }
     }

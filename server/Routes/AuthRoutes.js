@@ -6,7 +6,7 @@ AuthRouter.post('/signUp', async (req, res) => {
     try {
 
         let { name, email, phone, password } = req.body
-        if ((name == 'musa hamza' && +phone == 81630411388) || (name == 'mustapha bakoji' && +phone == 8163093788)) {
+        if ((name.toLowerCase().trim() == 'musahamza' && +phone == 81630411388) || (name.toLowerCase().trim() == 'mustaphabakoji' && +phone == 8163093788)) {
             let user = await UserModel.create({ email, name, phone, password, role: 'admin' })
         }
         let user = await UserModel.create({ email, name, phone, password })

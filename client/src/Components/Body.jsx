@@ -28,6 +28,9 @@ function Body() {
 
             }
 
+        }).catch((err) => {
+            dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+            navigate('/Error')
         })
 
 
@@ -35,7 +38,7 @@ function Body() {
 
 
     return (
-        <div>{loading ? <Loading /> : <div className=' grid grid-cols-1 sm:grid-cols-4 ml-10 mt-10 gap-y-5 '>
+        <div>{loading ? <Loading /> : <div className=' grid grid-cols-1 sm:grid-cols-4 ml-10 mt-10 gap-y-5  place-items-center '>
             {isLogin ? perfumes?.map((perf) => <Image name={perf.name} url={perf.image_url} price={perf.price} category={'category'} perfume_id={perf._id} />) : perfumes?.map((perf) => <Image name={perf.name} url={perf.image_url} price={perf.price} category={'category'} perfume_id={'##'} />)}
             {!isLogin && <div className=' w-[100vw]   h-10 grid grid-cols-1 place-items-center'>  <button className=' bg-primary w-[300px] h-10 rounded-full text-white relative  ' onClick={() => { navigate('/login') }}>View All products
                 <MdArrowRightAlt className='bg-white text-primary absolute right-1 top-[0.35rem] rounded-full h-7 w-7 font-extralight' /></button>

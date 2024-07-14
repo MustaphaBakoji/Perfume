@@ -31,6 +31,9 @@ function AdminLogin() {
                 }
 
 
+            }).catch((err) => {
+                dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+                navigate('/Error')
             })
 
         }

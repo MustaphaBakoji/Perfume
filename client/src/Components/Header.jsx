@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginActions } from '../Redux/UserSlice'
 import ShoppingCart from '../Cart/CartBody'
 import { useNavigate, } from 'react-router'
+import { erroActions } from '../Redux/ErrrorSlice'
 
 
 function Header() {
@@ -18,6 +19,9 @@ function Header() {
         id && fetch(`https://perfume-vfig.onrender.com/api/cart/${id}`).then(res => res.json()).then((data) => {
             console.log(data.perfumes.length);
             dispatch(loginActions.setCartno({ cartNo: data.perfumes.length }))
+        }).catch((err) => {
+            dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+            navigate('/Error')
         })
 
     }, [id])

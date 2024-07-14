@@ -44,6 +44,9 @@ function AddPerfume() {
                     setloading(false)
                 }
 
+            }).catch((err) => {
+                dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+                navigate('/Error')
             })
 
         }

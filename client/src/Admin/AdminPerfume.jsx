@@ -18,7 +18,7 @@ function AdminPerfume({ name, price, url }) {
 
             <img src={`${url}`} alt="somthing" className=' rounded-md w-16 h-16 ' />
             <p className=' text-amber-600' >{name}</p>
-            <input className='' readOnly={editable} onDoubleClick={() => {
+            <input className=' w-16 sm:w-28' readOnly={editable} onDoubleClick={() => {
                 seteditable(prev => (!prev))
             }}
                 onChange={(e) => {
@@ -53,6 +53,9 @@ function AdminPerfume({ name, price, url }) {
                             }))
                             navigate('/Error')
                         }
+                    }).catch((err) => {
+                        dispatch(erroActions.setError({ code: 500, message: "Server error! check your connection" }))
+                        navigate('/Error')
                     })
 
                 }
