@@ -23,7 +23,7 @@ function Image({ name, url, category, price, perfume_id }) {
         })
     }
     return (
-        <div className='w-[250px] sm:w-[220px] h-[280px] rounded border-slate-200 border-[1px] grid grid-cols-1  '>
+        <div className='w-[250px] sm:w-[220px] sm:h-[280px] h-[300px] rounded border-slate-200 border-[1px] grid grid-cols-1  '>
             <div className=' relative'><img src={`${url}`} alt="" className=' w-[200px] sm:w-[170px] h-[200px] sm:h-[180px] ml-auto mr-auto mt-5 rounded' />
                 <CiHeart className='absolute top-1 right-1 text-amber-500 w-5 h-5 hover:h-6 hover:w-6 hover:text-amber-700' onClick={CartHandler} />
             </div>
