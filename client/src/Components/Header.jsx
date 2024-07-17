@@ -33,7 +33,7 @@ function Header() {
     }
     console.log(cartNo);
     return (
-        <div> <div className=' flex justify-between '>
+        <div> <div className=' flex justify-between p-10'>
 
             <h1 className=' text-white  ml-20 text-2xl font-serif'> <span className=' text-amber-500  '>M&M</span> perfumes</h1>
             <div className='  flex mr-3 sm:mr-10'> <MdOutlineAccountCircle className=' text-amber-500  w-8 h-8 font-light ' onClick={() => { navigate('/login') }} />

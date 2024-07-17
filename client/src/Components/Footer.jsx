@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className=' bg-zinc-950 grid grid-cols-2 sm:grid-cols-4 place-items-center mt-5 '>
+        <div className='  bg-zinc-950 grid grid-cols-2 sm:grid-cols-4 place-items-center mt-5 '>
             <div className=" company text-white ">
                 <h2>
                     <p className=' text-amber-500 font-semibold text-lg '> M&M</p> Perfumes
